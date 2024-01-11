@@ -1,6 +1,6 @@
 # A Rough Representation of the Code-Along.
 
-### Creating the Project.
+## Creating the Project.
 
 1. using the command in the terminal
 
@@ -29,7 +29,7 @@ composer livewire/livewire
 
 5. Setting up a temp route in web.php
 
-### Creating Models and Migrations.
+## Creating Models and Migrations.
 
 1. setting db -> [ 'name', 'port, ] in the .env file
 
@@ -38,3 +38,13 @@ composer livewire/livewire
 ```terminal
 php artisan migrate
 ```
+
+3. Creating models (Poll, Vote and Option) -m flag is used to create migrations
+
+```
+php artisan make:model Poll -m
+php artisan make:model Vote -m
+php artisan make:model Option -m
+```
+
+4.  Configure relationships between all the models
