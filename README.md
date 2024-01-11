@@ -31,7 +31,7 @@ composer livewire/livewire
 
 ## Creating Models and Migrations.
 
-1. setting db -> [ 'name', 'port, ] in the .env file
+1. setting db -> [ 'name', 'port' ] in the .env file
 
 2. To create the table and default migrations use
 
@@ -47,4 +47,11 @@ php artisan make:model Vote -m
 php artisan make:model Option -m
 ```
 
-4.  Configure relationships between all the models
+4.  Configure relationships between all the models:
+    add a options function to the poll model (HasMany) as a poll can have many options
+    add a poll function to the option model (BelongsTo) as each option must be linked to a poll
+    add a votes fn -> option Model (HasMany) as each option can have multiple votes
+    add a option fn -> vote Model (BelongsTo) as each vote is linked to a single option
+
+5.  Next we need to fill out the migrations with the required column types, add foreign ids and lastly refresh the db.
+    note: when creating migrations keep note of the order and adjust accordingly to avoid any key associaing errors when the foreign key table is called earlier then the primary key table it was reflecting to. Also check for unwanted namespace or use pathway explicitly for the classes.
