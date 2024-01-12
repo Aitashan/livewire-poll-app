@@ -55,3 +55,19 @@ php artisan make:model Option -m
 
 5.  Next we need to fill out the migrations with the required column types, add foreign ids and lastly refresh the db.
     note: when creating migrations keep note of the order and adjust accordingly to avoid any key associaing errors when the foreign key table is called earlier then the primary key table it was reflecting to. Also check for unwanted namespace or use pathway explicitly for the classes.
+
+## Using livewire components.
+
+    Note: livewire is just like a blade component but with some added benefits.
+
+1. Make a livewire component in the terminal using the following command
+   note: a class and view will be generated.
+
+```
+php artisan make:livewire CreatePoll
+```
+
+2. To use the component either use a @livewire('create-poll') directive with the view name.
+
+3. In the CreatePoll class pass a public property and that public property can be seen updated live in a php varible output using
+   the wire:mode.live="property name" in the input tag.
