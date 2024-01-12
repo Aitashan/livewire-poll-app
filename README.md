@@ -71,3 +71,8 @@ php artisan make:livewire CreatePoll
 
 3. In the CreatePoll class pass a public property and that public property can be seen updated live in a php varible output using
    the wire:mode.live="property name" in the input tag.
+
+4. Adding further public properties in the class fn and then implmenting it with livewire actions on the view.
+
+5. Creating a public fuction mount to intialize the public properties.
+   Note: This only runs once and does not run again with subsequent re-renders.
