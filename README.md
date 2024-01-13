@@ -76,3 +76,58 @@ php artisan make:livewire CreatePoll
 
 5. Creating a public fuction mount to intialize the public properties.
    Note: This only runs once and does not run again with subsequent re-renders.
+
+## Implementing Poll options.
+
+1. Create a public function in the class that can be later called in using wire actions to add new poll.
+
+2. To add a new element to an existing arry we use
+
+```
+$this->options[] = '';
+```
+
+Note: The $options property must be defined before hand and must be initialized with an empty string like [''] either manually or using mount fn.
+
+3. Using a foreach loop we can iterate over each element while accounting for any new element added through the addOption action
+
+4. Next implemnt a remove button and generate a function for the button action logic (using the $index param)
+
+```
+unset($this->options[$index]);
+$this->options = array_values($this->options); // this is to make sure the array does not retain any gaps.
+```
+
+5. When using params in actions like $index inlcude them in using php
+
+```
+wire:click.prevent="removeOption({{$index}})"
+```
+
+## Creating || Saving poll to the backend (mysql-db).
+
+1. Adding a submit button and then making another action for poll-component to save data on the database.
+   Note: Don't forget to use .prevent on the form when listening for submit.
+
+2. Before using the mass-asignment feature in the createPoll fn, we need to first define the $fillables in the poll model.
+
+```
+protected $fillable = ['title']     // for the poll model
+protected $fillable = ['name']      // for the option model
+```
+
+3. Poll can be saved using createPoll logic as follows: (for adding poll option we will use loop)
+
+```
+$poll = Poll::create([
+    'title' => $this->title,        // $this->title refers to the $title in the component
+]);
+
+foreach($this->options as $optionName) {
+    $poll->options()->create(['name' => $optionName]);      // poll model has the options() relation which gives us create
+}
+
+$this->reset(['title', 'options']);     // this refrehes the properties on the page after saving to db
+```
+
+Note: Keep note of adding the correct namespaces for the model.
