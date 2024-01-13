@@ -1,12 +1,17 @@
 <div>
     @forelse ($polls as $poll)
         <div class="mb-4">
-            <h3 class="mb-4 text-xl">
-                {{ $poll->title }}
-            </h3>
+            <div>
+                <h3 class="mb-1 text-xl">
+                    {{ $poll->title }}
+                </h3>
+                <button class="mb-3 btn justify-self-end" wire:click.prevent="removePoll({{ $poll }})"
+                    wire:confirm="Are you sure?">Remove
+                    Poll</button>
+            </div>
             @foreach ($poll->options as $option)
                 <div class="mb-2">
-                    <button class="btn">Vote</button>
+                    <button class="btn" wire:click="vote({{ $option->id }})">Vote</button>
                     {{ $option->name }} ({{ $option->votes->count() }})
                 </div>
             @endforeach

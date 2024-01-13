@@ -3,8 +3,9 @@
 namespace App\Livewire;
 
 use App\Models\Poll;
-use Livewire\Attributes\On;
+use App\Models\Option;
 use Livewire\Component;
+use Livewire\Attributes\On;
 
 class Polls extends Component
 {
@@ -14,5 +15,18 @@ class Polls extends Component
         $polls = Poll::with('options.votes')->latest()->get();
 
         return view('livewire.polls', ['polls' => $polls]);
+    }
+
+    public function removePoll(Poll $poll)
+    {
+        $poll->options()->delete();
+        $poll->delete();
+    }
+
+    public function vote ($optionId)
+    {
+        $option = Option::findOrFail($optionId);
+
+        $option->votes()->create();
     }
 }

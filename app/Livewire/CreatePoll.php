@@ -69,6 +69,8 @@ class CreatePoll extends Component
         $this->dispatch('pollCreated');
     }
 
+    
+
 //     public function mount()
 //     {
 

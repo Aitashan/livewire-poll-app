@@ -210,3 +210,15 @@ Poll::with('options.vote')->latest()->get();
 4. laslty we index all the polls using forelse and foreach loops on the new poll.blade view.
 
 ## Livewire Events.
+
+This typicaly very easy all you need to do is add $this->dispatch('eventName') and then add #[On('eventName')] before the function you want updated in real-time.
+
+## Adding remove poll btn.
+
+Add btn in new poll blade view and make a remove function using $poll which is already being iterated over in the blade file as a param to the new polls controller.
+
+## Implementing votes.
+
+This is also done in a similar fashion where first we get the option by adding the findOrFail method to the option model then by simply passing in the id that was iterated over in the for loop we can pass it over along with a votes method to get that specific vote and end with create.
+
+This is just a counter for how many times the option is clicked so hitting create on the vote model with the specfic option id adds a timestamp to the table where finally the count method on the blade file adds all the similar ids.
