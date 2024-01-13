@@ -182,7 +182,7 @@ protected $messages = [
 ];
 ```
 
-5. To show real-time-validation on the page a updated fn can be added
+5. To show real-time-validation on the page an updated fn can be added to the component.
 
 ```
 public function updated($propertyName)
@@ -190,3 +190,13 @@ public function updated($propertyName)
         $this->validateOnly($propertyName);
     }
 ```
+
+## Implementing Poll page and Votes.
+
+1. Make new livewire component
+
+```
+php artisan make:livewire Polls
+```
+
+2.

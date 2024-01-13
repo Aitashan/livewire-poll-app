@@ -16,12 +16,13 @@ class CreatePoll extends Component
 
     protected $rules = [
         'title'=> 'required|min:3|max:255',
-        'options'=> 'required|array|min:2|max:10',
+        'options'=> 'required|array|min:2|max:10',    // how to show this validaiton in real-time 
         'options.*' => 'required|min:2|max:255'
     ];
 
     protected $messages = [
         'options.*.required' => 'The option cannot be empty.',
+        'options.min' => 'There must be atleast two options',
         'options.*' => 'The option must be valid length.'
     ];
 
@@ -32,7 +33,10 @@ class CreatePoll extends Component
 
     public function addOption()
     {
-        $this->options[] = '';
+        if (count($this->options) <= 9)  // instead of hardcoding 9 how can i make use of validation check
+        {
+            $this->options[] = '';
+        }
     }
 
     public function removeOption($index)

@@ -10,8 +10,12 @@
         @enderror
 
         <div class="mt-4 mb-4">
-            <button class="btn" wire:click.prevent="addOption">Add Option</button>
+            <button class="btn" wire:click.live.prevent="addOption">Add Option</button>
         </div>
+
+        @error('options')
+            <div class="text-red-500">{{ $message }}</div>
+        @enderror
 
         <div class="mt-1">
 
