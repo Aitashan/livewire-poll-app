@@ -199,4 +199,12 @@ public function updated($propertyName)
 php artisan make:livewire Polls
 ```
 
-2.
+2. We can all the polls using Poll model along "with" method to get options and its respective votes.
+
+```
+Poll::with('options.vote')->latest()->get();
+```
+
+3. add the livewire directive to the app layout with the new component name.
+
+4. laslty we index all the polls using forelse and foreach loops on the page.
