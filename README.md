@@ -222,3 +222,5 @@ Add btn in new poll blade view and make a remove function using $poll which is a
 This is also done in a similar fashion where first we get the option by adding the findOrFail method to the option model then by simply passing in the id that was iterated over in the for loop we can pass it over along with a votes method to get that specific vote and end with create.
 
 This is just a counter for how many times the option is clicked so hitting create on the vote model with the specfic option id adds a timestamp to the table where finally the count method on the blade file adds all the similar ids.
+
+Note: This can also be done using route model binding.

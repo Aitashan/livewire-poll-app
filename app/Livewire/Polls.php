@@ -23,10 +23,8 @@ class Polls extends Component
         $poll->delete();
     }
 
-    public function vote ($optionId)
+    public function vote (Option $option)
     {
-        $option = Option::findOrFail($optionId);
-
         $option->votes()->create();
     }
 }
