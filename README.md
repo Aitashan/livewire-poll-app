@@ -131,3 +131,19 @@ $this->reset(['title', 'options']);     // this refrehes the properties on the p
 ```
 
 Note: Keep note of adding the correct namespaces for the model.
+
+## Side-quest (Re-factoring the createPoll fn).
+
+```
+Poll::create([
+            'title'=> $this->title,
+            ])->options()->createMany(
+                collect($this->options)->map(fn ($option) => ['name' => $option])->all()
+            );
+```
+
+Instead of using foreach, we can do this the more laravel way. It is always best to minimize the use of variables.
+
+1. We can use the options() relation directly on the create model and then chain it with createMany.
+
+2. The Inside createMany we can use collect to make a collection of all the options and then return them with ->all().
