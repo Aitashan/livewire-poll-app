@@ -147,3 +147,46 @@ Instead of using foreach, we can do this the more laravel way. It is always best
 1. We can use the options() relation directly on the create model and then chain it with createMany.
 
 2. The Inside createMany we can use collect to make a collection of all the options and then return them with ->all().
+
+## Seting up Validation using liveWire.
+
+1. First we need to define rules array in the compoent under the pre-set properties. Note to validate the inner parts of an array or collection we use "array.\*" notation
+
+```
+protected $rules = [
+    'title' => 'required|min:3|max:255',
+    'options' => 'required|array|min:2|max:10',
+    'options.*' => 'required|min:1|max:255
+];
+```
+
+2. Next we just add validate method to the function that handles/submmits the form.
+
+```
+$this->validate();
+```
+
+3. To visually display invalid requests we can add @error directive in the blade view.
+
+```
+@error('options.{index}')
+        <div class="text-red-500">{{ $message }}</div>
+@enderror
+```
+
+4. For customzing the error messages we need to define another varible in the component.
+
+```
+protected $messages = [
+    'options.*.required' => 'The option cannot be empty',
+];
+```
+
+5. To show real-time-validation on the page a updated fn can be added
+
+```
+public function updated($propertyName)
+    {
+        $this->validateOnly($propertyName);
+    }
+```

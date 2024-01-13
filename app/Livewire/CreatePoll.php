@@ -3,12 +3,27 @@
 namespace App\Livewire;
 
 use App\Models\Poll;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 class CreatePoll extends Component
 {
+    // #[Validate]
     public $title;
+
+    // #[Validate]
     public $options = ['first'];
+
+    protected $rules = [
+        'title'=> 'required|min:3|max:255',
+        'options'=> 'required|array|min:2|max:10',
+        'options.*' => 'required|min:2|max:255'
+    ];
+
+    protected $messages = [
+        'options.*.required' => 'The option cannot be empty.',
+        'options.*' => 'The option must be valid length.'
+    ];
 
     public function render()
     {
@@ -26,8 +41,15 @@ class CreatePoll extends Component
         $this->options = array_values($this->options);
     }
 
+    public function updated($propertyName)
+    {
+        $this->validateOnly($propertyName);
+    }
+
     public function createPoll()
     {
+        $this->validate();
+
         Poll::create([
             'title'=> $this->title,
             ])->options()->createMany(
